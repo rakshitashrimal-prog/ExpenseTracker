@@ -7,14 +7,34 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="app">
+  <section id="authPanel" class="auth-panel">
+    <div class="auth-card">
+      <p class="eyebrow">PERSONAL FINANCE</p>
+      <h1>Expense Tracker</h1>
+      <p class="subtitle">Sign in to securely save your transactions to your database.</p>
+      <form id="authForm">
+        <label for="authEmail">Email</label>
+        <input id="authEmail" type="email" placeholder="you@example.com" autocomplete="email" required>
+        <label for="authPassword">Password</label>
+        <input id="authPassword" type="password" placeholder="At least 6 characters" autocomplete="current-password" minlength="6" required>
+        <div class="auth-actions">
+          <button class="primary-btn" type="submit" id="signInBtn">Sign In</button>
+          <button class="secondary-btn" type="button" id="signUpBtn">Create Account</button>
+        </div>
+      </form>
+      <p id="authMessage" class="message" role="status"></p>
+    </div>
+  </section>
+
+  <main id="appPanel" class="app hidden">
     <header class="header">
       <div>
         <p class="eyebrow">PERSONAL FINANCE</p>
         <h1>Expense Tracker</h1>
         <p class="subtitle">Keep your spending organized and under control.</p>
+        <p id="signedInAs" class="signed-in-as"></p>
       </div>
-      <button id="clearAllBtn" class="ghost-btn">Clear All</button>
+      <button id="signOutBtn" class="ghost-btn">Sign Out</button>
     </header>
 
     <section class="summary-grid">
@@ -68,9 +88,9 @@
 
           <label for="date">Date</label>
           <input id="date" type="date" required>
-
           <button class="primary-btn" type="submit">+ Add Transaction</button>
         </form>
+        <p id="appMessage" class="message" role="status"></p>
       </section>
 
       <section class="card list-card">
@@ -79,7 +99,7 @@
             <h2>Transactions</h2>
             <p id="transactionCount">0 transactions</p>
           </div>
-          <select id="filter">
+          <select id="filter" aria-label="Filter transactions">
             <option value="all">All</option>
             <option value="income">Income</option>
             <option value="expense">Expenses</option>
@@ -91,9 +111,12 @@
           <h3>No transactions yet</h3>
           <p>Add your first income or expense to get started.</p>
         </div>
+        <button id="clearAllBtn" class="ghost-btn clear-btn">Clear All Transactions</button>
       </section>
     </section>
   </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js"></script>
 </body>
 </html>
