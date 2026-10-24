@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section id="authPanel" class="auth-panel">
+    <div class="auth-card">
+      <p class="eyebrow">PERSONAL FINANCE</p>
+      <h1>Expense Tracker</h1>
+      <p class="subtitle">Sign in to securely save your transactions to your database.</p>
+      <form id="authForm">
+        <label for="authEmail">Email</label>
+        <input id="authEmail" type="email" placeholder="you@example.com" autocomplete="email" required>
+        <label for="authPassword">Password</label>
+        <input id="authPassword" type="password" placeholder="At least 6 characters" autocomplete="current-password" minlength="6" required>
+        <div class="auth-actions">
+          <button class="primary-btn" type="submit" id="signInBtn">Sign In</button>
+          <button class="secondary-btn" type="button" id="signUpBtn">Create Account</button>
+        </div>
+      </form>
+      <p id="authMessage" class="message" role="status"></p>
+    </div>
+  </section>
+
+  <main id="appPanel" class="app hidden">
+    <header class="header">
+      <div>
+        <p class="eyebrow">PERSONAL FINANCE</p>
+        <h1>Expense Tracker</h1>
+        <p class="subtitle">Keep your spending organized and under control.</p>
+        <p id="signedInAs" class="signed-in-as"></p>
+      </div>
+      <button id="signOutBtn" class="ghost-btn">Sign Out</button>
+    </header>
+
+    <section class="summary-grid">
+      <article class="card summary income">
+        <span>Total Income</span>
+        <strong id="totalIncome">₹0.00</strong>
+      </article>
+      <article class="card summary expense">
+        <span>Total Expenses</span>
+        <strong id="totalExpense">₹0.00</strong>
+      </article>
+      <article class="card summary balance">
+        <span>Balance</span>
+        <strong id="balance">₹0.00</strong>
+      </article>
+    </section>
+
+    <section class="content-grid">
+      <section class="card form-card">
+        <h2>Add Transaction</h2>
+        <form id="transactionForm">
+          <label for="type">Type</label>
+          <select id="type" required>
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+          </select>
+
+          <label for="description">Description</label>
+          <input id="description" type="text" placeholder="e.g. Grocery shopping" required>
+
+          <div class="two-col">
+            <div>
+              <label for="amount">Amount</label>
+              <input id="amount" type="number" min="0.01" step="0.01" placeholder="500" required>
+            </div>
+            <div>
+              <label for="category">Category</label>
+              <select id="category" required>
+                <option>Food</option>
+                <option>Transport</option>
+                <option>Shopping</option>
+                <option>Bills</option>
+                <option>Entertainment</option>
+                <option>Health</option>
+                <option>Education</option>
+                <option>Salary</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="date">Date</label>
+          <input id="date" type="date" required>
+          <button class="primary-btn" type="submit">+ Add Transaction</button>
+        </form>
+        <p id="appMessage" class="message" role="status"></p>
+      </section>
+
+      <section class="card list-card">
+        <div class="list-header">
+          <div>
+            <h2>Transactions</h2>
+            <p id="transactionCount">0 transactions</p>
+          </div>
+          <select id="filter" aria-label="Filter transactions">
+            <option value="all">All</option>
+            <option value="income">Income</option>
+            <option value="expense">Expenses</option>
+          </select>
+        </div>
+        <div id="transactionList" class="transaction-list"></div>
+        <div id="emptyState" class="empty-state">
+          <div class="empty-icon">₹</div>
+          <h3>No transactions yet</h3>
+          <p>Add your first income or expense to get started.</p>
+        </div>
+        <button id="clearAllBtn" class="ghost-btn clear-btn">Clear All Transactions</button>
+      </section>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>
